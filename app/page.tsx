@@ -24,11 +24,11 @@ export default function Home() {
   }, [comentario])
 
   return (
-    <div className="flex flex-row h-full w-full">
+    <div className="flex flex-row h-screen w-full">
       {/* PDF PRINCIPAL 70% */}
       <div className="flex-[7] border-r flex flex-col">
         {/* Contenedor con scroll independiente */}
-        <div className="flex-1 overflow-y-auto h-full" style={{ WebkitOverflowScrolling: 'touch' }}>
+        <div className="flex-1 h-0 overflow-y-auto" style={{ WebkitOverflowScrolling: 'touch' }}>
           <PdfViewer url={`/pdfs/semana${semana}/leccion.pdf`} />
         </div>
       </div>
