@@ -12,15 +12,17 @@ export default function PDFViewer({ file }: { file: string }) {
     setNumPages(numPages)
   }
 
-  return (
-    <Document
-      file={file}
-      onLoadSuccess={onLoadSuccess}
-      loading="Cargando PDF..."
-    >
-      {Array.from(new Array(numPages), (_, i) => (
-        <Page key={i} pageNumber={i + 1} width={700} />
-      ))}
-    </Document>
-  )
+    return (
+      <div className="flex-1 h-full overflow-auto touch-pan-y">
+        <Document
+          file={file}
+          onLoadSuccess={onLoadSuccess}
+          loading="Cargando PDF..."
+        >
+          {Array.from(new Array(numPages), (_, i) => (
+            <Page key={i} pageNumber={i + 1} width={700} />
+          ))}
+        </Document>
+      </div>
+    )
 }

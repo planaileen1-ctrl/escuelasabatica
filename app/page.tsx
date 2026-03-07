@@ -24,10 +24,10 @@ export default function Home() {
   }, [comentario])
 
   return (
-    <div style={{ display: "flex", height: "100vh" }}>
+    <div className="flex flex-col md:flex-row flex-1 h-screen overflow-hidden">
 
       {/* PDF PRINCIPAL */}
-      <div style={{ flex: 3, borderRight: "1px solid #ccc" }}>
+      <div className="flex-1 border-r overflow-auto" style={{ borderRight: "1px solid #ccc" }}>
         <iframe
           src={`/pdfs/semana${semana}/leccion.pdf`}
           width="100%"
@@ -36,7 +36,7 @@ export default function Home() {
       </div>
 
       {/* PANEL DERECHO */}
-      <div style={{ flex: 1, padding: 20, overflow: "auto" }}>
+      <div className="flex-1 p-5 overflow-auto">
 
         <h2>Semana</h2>
 
