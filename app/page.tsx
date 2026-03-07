@@ -26,7 +26,7 @@ export default function Home() {
   return (
     <div className="flex flex-row h-full w-full">
       {/* PDF PRINCIPAL 70% */}
-      <div className="flex-[7] border-r overflow-auto">
+      <div className="flex-[7] border-r h-full overflow-y-auto" style={{ WebkitOverflowScrolling: 'touch' }}>
         <PdfViewer url={`/pdfs/semana${semana}/leccion.pdf`} />
       </div>
 
@@ -51,7 +51,7 @@ export default function Home() {
         </div>
 
         {/* PDF secundario */}
-        <div className="h-[300px] w-full overflow-auto border mb-2">
+        <div className="h-75 w-full overflow-auto border mb-2">
           <PdfViewer url={`/pdfs/semana${semana}/${tipo}.pdf`} />
         </div>
 
@@ -63,7 +63,7 @@ export default function Home() {
           value={comentario}
           onChange={(e) => setComentario(e.target.value)}
           placeholder="Escribe tus comentarios aquí..."
-          className="w-full h-[150px] p-2 mt-2 border rounded resize-none"
+          className="w-full h-37.5 p-2 mt-2 border rounded resize-none"
         />
       </div>
     </div>
