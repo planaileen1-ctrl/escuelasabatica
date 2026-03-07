@@ -7,7 +7,7 @@ import '@react-pdf-viewer/default-layout/lib/styles/index.css';
 export default function PdfViewer({ url }: { url: string }) {
     const plugin = defaultLayoutPlugin();
     return (
-        <div style={{ height: '100%', width: '100%' }}>
+        <div className="h-full w-full">
             <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js">
                 <Viewer fileUrl={url} plugins={[plugin]} />
             </Worker>
