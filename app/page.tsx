@@ -34,7 +34,7 @@ export default function Home() {
       </div>
 
       {/* PANEL DERECHO 30% */}
-      <div className="flex-[3] p-5 flex flex-col overflow-y-auto gap-2">
+      <div className="flex-[3] p-5 flex flex-col gap-2">
         {/* Selección de semana */}
         <select
           value={semana}
@@ -58,8 +58,10 @@ export default function Home() {
           <PdfViewer url={`/pdfs/semana${semana}/${tipo}.pdf`} />
         </div>
 
-        {/* Biblia */}
-        <Biblia />
+        {/* Biblia con scroll independiente */}
+        <div className="h-[200px] overflow-y-auto border mb-2" style={{ WebkitOverflowScrolling: 'touch' }}>
+          <Biblia />
+        </div>
 
         {/* Comentarios */}
         <textarea
