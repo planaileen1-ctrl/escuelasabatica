@@ -29,8 +29,13 @@ export default function Home() {
     <div className="flex flex-col md:flex-row h-screen">
 
       {/* PDF PRINCIPAL */}
-      <div className="w-full md:w-1/2 border-r h-screen overflow-auto" style={{ borderRight: "1px solid #ccc" }}>
-        <PdfViewer url={`/pdfs/semana${semana}/leccion.pdf`} />
+      <div className="flex-1 flex flex-col h-screen border-r" style={{ borderRight: "1px solid #ccc" }}>
+        <div className="flex-none p-3">
+          {/* controles de semana y tipos */}
+        </div>
+        <div className="flex-1 overflow-hidden">
+          <PdfViewer url={`/pdfs/semana${semana}/leccion.pdf`} />
+        </div>
       </div>
 
       {/* PANEL DERECHO */}
