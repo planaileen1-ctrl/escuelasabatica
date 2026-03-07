@@ -26,8 +26,10 @@ export default function Home() {
   return (
     <div className="flex flex-row h-full w-full">
       {/* PDF PRINCIPAL 70% */}
-      <div className="flex-[7] border-r h-full overflow-y-auto" style={{ WebkitOverflowScrolling: 'touch' }}>
-        <PdfViewer url={`/pdfs/semana${semana}/leccion.pdf`} />
+      <div className="flex-[7] border-r flex flex-col">
+        <div className="flex-1 overflow-y-auto" style={{ WebkitOverflowScrolling: 'touch' }}>
+          <PdfViewer url={`/pdfs/semana${semana}/leccion.pdf`} />
+        </div>
       </div>
 
       {/* PANEL DERECHO 30% */}
