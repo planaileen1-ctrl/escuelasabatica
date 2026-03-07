@@ -27,49 +27,42 @@ export default function Home() {
 
   return (
     <div className="flex flex-col md:flex-row h-screen">
+
       {/* PDF principal */}
-      <div className="flex-1 border-r">
+      <div className="flex-1 border-r overflow-auto" style={{ WebkitOverflowScrolling: 'touch' }}>
         <PdfViewer url={`/pdfs/semana${semana}/leccion.pdf`} />
       </div>
 
       {/* Panel derecho */}
-      <div className="flex-1 flex flex-col p-4 overflow-auto">
+      <div className="flex-1 p-5 flex flex-col">
+
         {/* Controles */}
-        <div className="flex flex-col gap-2 mb-2">
-          <select
-            value={semana}
-            onChange={(e) => setSemana(Number(e.target.value))}
-            className="border p-1 rounded"
-          >
-            {Array.from({ length: 13 }, (_, i) => (
-              <option key={i} value={i + 1}>
-                Semana {i + 1}
-              </option>
-            ))}
-          </select>
-          <div className="flex gap-2">
-            <button onClick={() => setTipo("visual")} className="border px-3 py-1 rounded">Visual</button>
-            <button onClick={() => setTipo("resumen")} className="border px-3 py-1 rounded">Resumen</button>
-            <button onClick={() => setTipo("preguntas")} className="border px-3 py-1 rounded">Preguntas</button>
-          </div>
+        <select value={semana} onChange={(e) => setSemana(Number(e.target.value))}>
+          {Array.from({ length: 13 }, (_, i) => (
+            <option key={i} value={i+1}>Semana {i+1}</option>
+          ))}
+        </select>
+
+        <div className="my-2 flex gap-2">
+          <button onClick={() => setTipo("visual")}>Visual</button>
+          <button onClick={() => setTipo("resumen")}>Resumen</button>
+          <button onClick={() => setTipo("preguntas")}>Preguntas</button>
         </div>
 
-        {/* PDF secundario */}
-        <div className="flex-1 border mt-2">
+        {/* PDF secundario con altura fija */}
+        <div style={{ height: '300px', width: '100%', overflow: 'auto', WebkitOverflowScrolling: 'touch' }}>
           <PdfViewer url={`/pdfs/semana${semana}/${tipo}.pdf`} />
         </div>
 
         <Biblia />
 
         {/* Comentarios */}
-        <div className="flex-1 mt-2 overflow-auto">
-          <textarea
-            value={comentario}
-            onChange={(e) => setComentario(e.target.value)}
-            placeholder="Escribe tus comentarios aquí..."
-            className="w-full h-36 p-2 border rounded"
-          />
-        </div>
+        <textarea
+          value={comentario}
+          onChange={(e) => setComentario(e.target.value)}
+          placeholder="Escribe tus comentarios aquí..."
+          style={{ width: '100%', height: '150px', padding: '10px', marginTop: '10px' }}
+        />
       </div>
     </div>
   )
