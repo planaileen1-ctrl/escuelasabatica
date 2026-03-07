@@ -26,31 +26,35 @@ export default function Home() {
   }, [comentario])
 
   return (
-    <div className="flex flex-col md:flex-row h-screen">
+    <div className="flex flex-row h-screen">
 
-      {/* PDF principal */}
+      {/* PDF PRINCIPAL */}
       <div className="flex-1 border-r overflow-auto" style={{ WebkitOverflowScrolling: 'touch' }}>
         <PdfViewer url={`/pdfs/semana${semana}/leccion.pdf`} />
       </div>
 
-      {/* Panel derecho */}
-      <div className="flex-1 p-5 flex flex-col">
+      {/* PANEL DERECHO */}
+      <div className="flex-1 p-5 flex flex-col overflow-auto">
 
         {/* Controles */}
-        <select value={semana} onChange={(e) => setSemana(Number(e.target.value))}>
+        <select
+          value={semana}
+          onChange={(e) => setSemana(Number(e.target.value))}
+          className="border p-1 rounded mb-2"
+        >
           {Array.from({ length: 13 }, (_, i) => (
-            <option key={i} value={i+1}>Semana {i+1}</option>
+            <option key={i} value={i + 1}>Semana {i + 1}</option>
           ))}
         </select>
 
-        <div className="my-2 flex gap-2">
-          <button onClick={() => setTipo("visual")}>Visual</button>
-          <button onClick={() => setTipo("resumen")}>Resumen</button>
-          <button onClick={() => setTipo("preguntas")}>Preguntas</button>
+        <div className="flex gap-2 mb-2">
+          <button onClick={() => setTipo("visual")} className="border px-3 py-1 rounded">Visual</button>
+          <button onClick={() => setTipo("resumen")} className="border px-3 py-1 rounded">Resumen</button>
+          <button onClick={() => setTipo("preguntas")} className="border px-3 py-1 rounded">Preguntas</button>
         </div>
 
-        {/* PDF secundario con altura fija */}
-        <div style={{ height: '300px', width: '100%', overflow: 'auto', WebkitOverflowScrolling: 'touch' }}>
+        {/* PDF SECUNDARIO con altura fija */}
+        <div style={{ height: '300px', width: '100%', overflow: 'auto', WebkitOverflowScrolling: 'touch', border: '1px solid #ccc', marginBottom: '10px' }}>
           <PdfViewer url={`/pdfs/semana${semana}/${tipo}.pdf`} />
         </div>
 
@@ -64,6 +68,7 @@ export default function Home() {
           style={{ width: '100%', height: '150px', padding: '10px', marginTop: '10px' }}
         />
       </div>
+
     </div>
   )
 }
