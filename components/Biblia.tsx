@@ -2,7 +2,11 @@
 
 import { useState, useEffect } from "react"
 
-export default function Biblia() {
+interface BibliaProps {
+  agregarVersiculo?: (v: string) => void;
+}
+
+export default function Biblia({ agregarVersiculo }: BibliaProps) {
 
   const [biblia, setBiblia] = useState<any>({})
   const [libro, setLibro] = useState("")
@@ -76,12 +80,11 @@ export default function Biblia() {
 
         <div>
 
-          {Object.keys(biblia[libro][capitulo]).map((v) => (
 
-            <p key={v}>
+          {Object.keys(biblia[libro][capitulo]).map((v) => (
+            <p key={v} className="cursor-pointer hover:bg-yellow-100" onClick={() => agregarVersiculo && agregarVersiculo(`${libro} ${capitulo}:${v} - ${biblia[libro][capitulo][v]}`)}>
               <b>{v}</b> {biblia[libro][capitulo][v]}
             </p>
-
           ))}
 
         </div>

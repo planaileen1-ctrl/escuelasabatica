@@ -9,6 +9,7 @@ export default function Home() {
     const [showModal, setShowModal] = useState(false);
     const [editFecha, setEditFecha] = useState<string | null>(null);
     const [editTexto, setEditTexto] = useState("");
+    const [BibliaPasaje, setBibliaPasaje] = useState("");
   function formatDateDMY(dateStr: string) {
     if (!dateStr) return "";
     const [year, month, day] = dateStr.split("-");
@@ -23,6 +24,7 @@ export default function Home() {
 
   function agregarVersiculo(v: string) {
     setComentario(prev => prev + "\n" + v);
+    setBibliaPasaje(v);
   }
 
   useEffect(() => {
@@ -42,8 +44,14 @@ export default function Home() {
   return (
     <div className="flex flex-row h-screen w-full">
       {/* PDF PRINCIPAL 70% */}
-      <div className="flex-[7] border-r flex flex-col">
-        {/* ...comentarios eliminados del lado izquierdo... */}
+      <div className="flex-7 border-r flex flex-col">
+        {/* Mostrar pasaje bíblico seleccionado arriba del PDF grande */}
+        {BibliaPasaje && (
+          <div className="border-b p-4 bg-yellow-50">
+            <div className="font-bold mb-1">Pasaje bíblico seleccionado:</div>
+            <div className="text-base text-gray-800 whitespace-pre-line">{BibliaPasaje}</div>
+          </div>
+        )}
         {/* Contenedor con scroll independiente */}
         <div className="flex-1 h-0 overflow-y-auto" style={{ WebkitOverflowScrolling: 'touch' }}>
           <PdfViewer url={`/pdfs/semana${semana}/${tipo === "leccion" ? "leccion" : tipo}.pdf`} />
@@ -51,7 +59,7 @@ export default function Home() {
       </div>
 
       {/* PANEL DERECHO 30% */}
-      <div className="flex-[2] p-3 flex flex-col gap-2">
+      <div className="flex-2 p-3 flex flex-col gap-2">
         {/* Selección de semana */}
         <select
           value={semana}
@@ -72,7 +80,7 @@ export default function Home() {
         </div>
 
         {/* Caja de comentarios guardados */}
-        <div className="h-[300px] w-full overflow-y-auto border mb-2 bg-white p-2">
+        <div className="h-75 w-full overflow-y-auto border mb-2 bg-white p-2">
           <div className="flex justify-between items-center mb-2">
             <span className="font-bold">Comentarios guardados</span>
             <button className="border rounded px-2 py-1 text-xs bg-blue-500 text-white" onClick={() => setShowModal(true)}>
@@ -106,7 +114,7 @@ export default function Home() {
                     <textarea
                       value={editTexto}
                       onChange={e => setEditTexto(e.target.value)}
-                      className="w-full h-[80px] p-2 border rounded resize-none mb-2"
+                      className="w-full h-20 p-2 border rounded resize-none mb-2"
                     />
                     <button className="border rounded p-2 bg-blue-600 text-white mr-2" onClick={() => {
                       setComentariosPorFecha(prev => {
@@ -126,7 +134,7 @@ export default function Home() {
         {/* Modal flotante para ver todos los comentarios */}
         {showModal && (
           <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
-            <div className="bg-white rounded shadow-lg p-6 w-[400px] max-h-[80vh] overflow-y-auto relative">
+            <div className="bg-white rounded shadow-lg p-6 w-100 max-h-[80vh] overflow-y-auto relative">
               <button className="absolute top-2 right-2 text-gray-500 hover:text-gray-800" onClick={() => setShowModal(false)}>
                 ×
               </button>
@@ -146,9 +154,9 @@ export default function Home() {
           </div>
         )}
 
-        {/* Biblia con scroll independiente */}
-        <div className="h-[200px] overflow-y-auto border mb-2" style={{ WebkitOverflowScrolling: 'touch' }}>
-          <Biblia />
+        {/* Biblia con scroll independiente, conectada al área principal */}
+        <div className="h-50 overflow-y-auto border mb-2" style={{ WebkitOverflowScrolling: 'touch' }}>
+          <Biblia agregarVersiculo={agregarVersiculo} />
         </div>
 
         {/* Comentarios */}
@@ -169,7 +177,7 @@ export default function Home() {
                 value={comentario}
                 onChange={e => setComentario(e.target.value)}
                 placeholder={`Comentario para ${selectedDate}`}
-                className="w-full h-[100px] p-2 border rounded resize-none"
+                className="w-full h-25 p-2 border rounded resize-none"
               />
               <button
                 className="border rounded p-2 bg-blue-600 text-white"
