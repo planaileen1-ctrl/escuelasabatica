@@ -51,7 +51,7 @@ export default function Home() {
       </div>
 
       {/* PANEL DERECHO 30% */}
-      <div className="flex-[3] p-5 flex flex-col gap-2">
+      <div className="flex-[2] p-3 flex flex-col gap-2">
         {/* Selección de semana */}
         <select
           value={semana}
